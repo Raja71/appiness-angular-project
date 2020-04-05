@@ -1,0 +1,29 @@
+<section class="mt-2" *ngIf="isLoading"> 
+    <mat-progress-bar color="primary" mode="interminate"></mat-progress-bar>
+  </section>
+
+<div class="container home mb-2">
+    <div class="row"  *ngIf="repositories">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-4" *ngFor="let owner of ownerInfo">
+            <mat-card class="example-card card-block mt-2 mb-2">
+                <mat-card-header>
+                    <mat-card-title>Name: {{owner.login}}</mat-card-title>
+                  </mat-card-header>
+                    <img mat-card-image src="{{owner.avatar_url}}" alt="Photo of a Shiba Inu">
+                </mat-card>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-4" *ngFor="let repo of repositories[0]">
+            <mat-card class="example-card card-block mt-2 mb-2">
+                    <mat-card-title class="title-font">Name: {{repo.name}}</mat-card-title>
+                  <mat-card-content>
+                    nodeId:  {{repo.node_id | bcEllipsis: 10}}
+                  </mat-card-content>
+                  <a href="{{repo.html_url}}" target="_blank">{{repo.full_name}}</a>
+                </mat-card>
+        </div>
+    </div>
+    <div class="col-10 mx-auto" *ngIf="repositories.length <= 0 && !isLoading">
+        <span class="message">{{message}}</span>
+</div>
+</div>
+
